@@ -1,0 +1,578 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+    --color-blush: #FFE5E5;
+    --color-velvet: #8B1538;
+    --color-milk: #FFF8F0;
+    --color-black: #000000;
+    --color-pink-light: #FFB6C1;
+    --color-rose: #FF69B4;
+    --color-lavender: #E6E6FA;
+}
+
+/* Base Styles */
+@layer base {
+    body {
+        font-family: 'Lato', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(135deg, #FFF8F0 0%, #FFE5E5 50%, #FFF8F0 100%);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+        text-shadow: 2px 2px 8px rgba(139, 21, 56, 0.1);
+    }
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+    .perspective-3d {
+        perspective: 2000px;
+    }
+
+    .transform-3d {
+        transform-style: preserve-3d;
+    }
+
+    .font-playfair {
+        font-family: 'Playfair Display', serif;
+    }
+
+    .font-lato {
+        font-family: 'Lato', sans-serif;
+    }
+
+    .text-blush {
+        color: var(--color-blush);
+    }
+
+    .text-velvet {
+        color: var(--color-velvet);
+    }
+
+    .text-milk {
+        color: var(--color-milk);
+    }
+
+    .bg-blush {
+        background-color: var(--color-blush);
+    }
+
+    .bg-velvet {
+        background-color: var(--color-velvet);
+    }
+
+    .bg-milk {
+        background-color: var(--color-milk);
+    }
+
+    .border-blush {
+        border-color: var(--color-blush);
+    }
+
+    .border-velvet {
+        border-color: var(--color-velvet);
+    }
+}
+
+/* Envelope 3D Styles with Enhanced Romance */
+.envelope {
+    width: clamp(300px, 80vw, 500px);
+    height: clamp(225px, 60vw, 375px);
+    position: relative;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 10px 30px rgba(255, 105, 180, 0.3));
+    transition: filter 0.3s ease;
+}
+
+.envelope:hover {
+    filter: drop-shadow(0 15px 40px rgba(255, 105, 180, 0.5));
+}
+
+.envelope-back {
+    backface-visibility: hidden;
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFE5E5 100%);
+    border-radius: 12px;
+}
+
+.envelope-flap {
+    transform-origin: top center;
+    backface-visibility: hidden;
+}
+
+.letter {
+    transform-style: preserve-3d;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+}
+
+/* Floating Hearts Animation - Enhanced */
+.floating-hearts-container {
+    pointer-events: none;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    opacity: 0.3;
+    animation: float-up 12s ease-in-out infinite;
+    filter: drop-shadow(0 2px 8px rgba(255, 105, 180, 0.4));
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(-50vh) translateX(20px) rotate(15deg) scale(1.2);
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(-30px) rotate(-10deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Cute Sparkle Animation */
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(180deg);
+    }
+}
+
+/* Timeline Styles - Enhanced Romance */
+.timeline-line {
+    background: linear-gradient(to bottom, 
+        rgba(255, 105, 180, 0.4) 0%, 
+        rgba(255, 182, 193, 0.6) 50%, 
+        rgba(255, 105, 180, 0.4) 100%);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+}
+
+.timeline-event {
+    transition: all 0.3s ease;
+}
+
+.timeline-event:hover .timeline-content {
+    transform: scale(1.05);
+}
+
+.timeline-dot {
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.6), 
+                0 0 40px rgba(255, 105, 180, 0.3);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.6), 
+                    0 0 40px rgba(255, 105, 180, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 105, 180, 0.8), 
+                    0 0 60px rgba(255, 105, 180, 0.5);
+    }
+}
+
+/* Polaroid Card Styles - Cuter */
+.polaroid-card {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+                box-shadow 0.5s ease;
+    will-change: transform;
+    border-radius: 12px;
+}
+
+.polaroid-card:hover {
+    box-shadow: 0 20px 50px rgba(255, 105, 180, 0.4),
+                0 0 30px rgba(255, 182, 193, 0.3);
+}
+
+/* Audio Player Styling */
+.voice-note-player {
+    height: 40px;
+    accent-color: var(--color-velvet);
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: rgba(255, 229, 229, 0.1);
+}
+
+/* Video Frame */
+.video-frame video {
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(255, 105, 180, 0.3);
+}
+
+/* Scroll Indicator Animation - Enhanced */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(10px);
+    }
+}
+
+/* Decorative Heart Elements */
+.heart-decoration {
+    position: relative;
+}
+
+.heart-decoration::before,
+.heart-decoration::after {
+    content: '💕';
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0.2;
+    animation: sparkle 3s ease-in-out infinite;
+}
+
+.heart-decoration::before {
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.heart-decoration::after {
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation-delay: 1.5s;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .envelope {
+        width: clamp(250px, 90vw, 400px);
+        height: clamp(187px, 67.5vw, 300px);
+    }
+
+    .timeline-event {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+
+    .timeline-content {
+        width: 100% !important;
+        text-align: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-top: 1rem;
+    }
+
+    .timeline-line {
+        left: 1rem !important;
+    }
+
+    .timeline-dot {
+        left: 1rem !important;
+    }
+
+    .polaroid-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .voice-notes-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .heart-decoration::before,
+    .heart-decoration::after {
+        display: none;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .floating-heart {
+        animation: none;
+        opacity: 0.1;
+    }
+
+    .polaroid-card {
+        transition: none;
+    }
+
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .floating-hearts-container,
+    .audio-player-container,
+    footer {
+        display: none;
+    }
+
+    .letter-content {
+        opacity: 1 !important;
+    }
+
+    .envelope-stage {
+        display: none;
+    }
+}
+
+/* Flip Card 3D Effects - Enhanced */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotateY-180 {
+  transform: rotateY(180deg);
+}
+
+/* Heart Grid - Flexbox Row Layout */
+.heart-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 0.8vw, 8px);
+  width: 100%;
+}
+
+.heart-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(4px, 0.8vw, 8px);
+}
+
+.heart-row-lobes {
+  gap: clamp(30px, 8vw, 80px);
+}
+
+.heart-card {
+  flex-shrink: 0;
+}
+
+/* Responsive Flip Card Sizing */
+.flip-card-container {
+  width: clamp(60px, 17vw, 180px);
+  height: clamp(60px, 17vw, 180px);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .flip-card-container {
+    width: clamp(100px, 14vw, 180px);
+    height: clamp(100px, 14vw, 180px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .flip-card-container {
+    width: clamp(140px, 12vw, 200px);
+    height: clamp(140px, 12vw, 200px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .flip-card-container {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.flip-card-container.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-container:hover {
+  transform: translateY(-8px) scale(1.02);
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.4));
+}
+
+/* Heart-shaped text styling - Properly sized */
+.flip-card-front {
+  background: linear-gradient(135deg, #fff 0%, #ffe5e5 50%, #ffb6c1 100%);
+  border-radius: 12px;
+  padding: 0 !important;
+}
+
+.flip-card-back {
+  background: linear-gradient(135deg, #fff 0%, #ffe5e5 100%);
+  border-radius: 12px;
+  padding: 0 !important;
+}
+
+.flip-card-front p {
+  text-shadow: 2px 2px 6px rgba(139, 21, 56, 0.15);
+  padding: 0.5rem;
+  font-size: 0.85rem !important;
+  line-height: 1.3;
+}
+
+.flip-card-front p span {
+  font-size: 0.7rem !important;
+}
+
+.flip-card-front .text-3xl {
+  font-size: 1.75rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.flip-card-front .text-xl {
+  font-size: 1.75rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.flip-card-back .polaroid-image {
+  margin: 0 !important;
+  height: calc(100% - 1.5rem) !important;
+  padding: 0.5rem;
+}
+
+.flip-card-back p {
+  padding: 0.25rem 0.5rem;
+  margin: 0;
+}
+
+/* Button Styles - Cuter */
+.valentine-btn {
+  border-radius: 50px;
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.valentine-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.valentine-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.yes-btn {
+  background: linear-gradient(135deg, #8B1538 0%, #FF1493 100%);
+  box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4),
+              0 0 30px rgba(255, 105, 180, 0.3);
+}
+
+.yes-btn:hover {
+  box-shadow: 0 12px 35px rgba(255, 20, 147, 0.5),
+              0 0 40px rgba(255, 105, 180, 0.5);
+  transform: scale(1.05) translateY(-2px);
+}
+
+.no-btn {
+  background: linear-gradient(135deg, #fff 0%, #ffe5e5 100%);
+  box-shadow: 0 8px 25px rgba(139, 21, 56, 0.2);
+}
+
+/* Section Backgrounds - More Romantic */
+.hero-section {
+  background: radial-gradient(circle at top, rgba(255, 182, 193, 0.2) 0%, transparent 70%);
+  position: relative;
+}
+
+.timeline-section {
+  background: radial-gradient(circle at center, rgba(255, 229, 229, 0.3) 0%, transparent 70%);
+  position: relative;
+}
+
+.gallery-section {
+  background: radial-gradient(circle at bottom, rgba(255, 182, 193, 0.2) 0%, transparent 70%);
+  position: relative;
+}
+
+.closing-section {
+  background: radial-gradient(circle at center, rgba(255, 105, 180, 0.15) 0%, transparent 70%);
+  position: relative;
+}
+
+.valentine-question-section {
+  background: radial-gradient(circle at center, rgba(255, 182, 193, 0.25) 0%, transparent 70%);
+  position: relative;
+}
+
+/* Cute Bounce Animation */
+@keyframes cute-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .flip-card-front p {
+    font-size: 0.75rem !important;
+  }
+
+  .flip-card-front p span {
+    font-size: 0.65rem !important;
+  }
+
+  .flip-card-front .text-xl {
+    font-size: 1.5rem !important;
+  }
+
+}
+
+@media (max-width: 640px) {
+  .flip-card-front p {
+    font-size: 0.7rem !important;
+  }
+
+  .flip-card-front p span {
+    font-size: 0.6rem !important;
+  }
+
+  .flip-card-front .text-xl {
+    font-size: 1.4rem !important;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .flip-card-front .text-xl {
+    font-size: 1.3rem !important;
+  }
+}
