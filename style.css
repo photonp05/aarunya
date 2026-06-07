@@ -1,0 +1,697 @@
+@import url('https://fonts.cdnfonts.com/css/retro-mario');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700");
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+@property --x0 {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: true
+}
+
+@property --x1 {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: true
+}
+
+@property --y0 {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true
+}
+
+@property --y1 {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true
+}
+
+@property --p {
+  syntax: "<integer>";
+  initial-value: 1;
+  inherits: true
+}
+
+/* ==================== GAME SECTION STYLES ==================== */
+html {
+  --b: 50px;
+  --s: 80px;
+  --t: 20px;
+  --nc: 2153;
+  animation: --y0 linear both, --x0 linear both;
+  animation-timeline: scroll(y self), scroll(x self);
+  --_i: calc(round(var(--x0)*(100vw - var(--b)), var(--b))/var(--b));
+  background: url(https://assets.codepen.io/1480814/bgmario.png?v=1) 0 100%/calc(11*var(--b)) repeat-x fixed #5c94fc;
+  container-type: scroll-state;
+  font-family: 'Retro Mario', sans-serif;
+  scrollbar-width: none;
+}
+
+@keyframes --y0 {
+  to {
+    --y0: var(--nc)
+  }
+}
+
+@keyframes --x0 {
+  to {
+    --x0: 1
+  }
+}
+
+body {
+  display: grid;
+  height: calc(100vh + calc(var(--nc)*40px));
+  width: 500vw;
+  margin: 0;
+}
+
+#gameSection {
+  display: contents;
+}
+
+#gameSection.hidden {
+  display: none !important;
+}
+
+body:before {
+  content: "";
+  width: var(--b);
+  aspect-ratio: 2/3;
+  background: url(https://assets.codepen.io/1480814/mario-a.png) 0/auto 100% no-repeat;
+  margin-top: auto;
+  position: sticky;
+  bottom: calc(2*var(--b));
+  left: 0;
+  transition: --y1 .4s, --x1 0s .3s;
+  --y1: var(--y0);
+  --x1: var(--x0);
+  --j: min(abs(var(--y0) - var(--y1)), 1);
+  --i: calc(min(abs(var(--x0) - var(--x1))*9e9, 1) + var(--j)*9e9);
+  translate: calc((100vw - var(--b))*var(--x0)) calc(-1*var(--j)*var(--s));
+  animation: m .4s steps(2, jump-none) infinite;
+  scale: sign(var(--x0) - var(--x1) + .001) 1;
+
+  @container scroll-state(scrolled: left) {
+    scale: -1 1;
+  }
+}
+
+
+@keyframes m {
+  0% {
+    background-position: max(var(--i)*100%/3, 100%) 0
+  }
+
+  to {
+    background-position: max(var(--i)*200%/3, 100%) 0
+  }
+}
+
+wall,
+coin {
+  position: absolute;
+}
+
+:is(wall, coin):after,
+coin:before {
+  content: "";
+  position: fixed;
+  bottom: calc(3.5*var(--b));
+  height: var(--b);
+  aspect-ratio: 1;
+  --p: attr(p type(<integer>));
+  --y1: var(--y0);
+  --j: min(abs(var(--y0) - var(--y1)), 1);
+  left: calc(var(--p)*var(--b));
+  background: url(https://assets.codepen.io/1480814/block.png) 50%/auto 100% no-repeat;
+  transition: --y1 .4s;
+  translate: if(style(--p: var(--_i)): 0 min(-1*var(--j)*var(--s), var(--t) - var(--s)); else: 0 min(var(--t) - var(--s)); );
+}
+
+coin:after {
+  background-position: 100%;
+}
+
+coin:before {
+  background: url(https://assets.codepen.io/1480814/ccc.png) 0 50%/600% auto no-repeat;
+  animation: c .5s steps(6, jump-none) infinite;
+  scale: .6;
+  transition: --y1 1s;
+  translate: if(style(--p: var(--_i)): 0 min(-2*var(--j)*var(--s), var(--t) - var(--s)); else: 0 min(var(--t) - var(--s)); );
+}
+
+@keyframes c {
+  to {
+    background-position-x: 100%
+  }
+}
+
+html:not(:has(:focus-within)):after {
+  content: "🖱️ Click to start";
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 60px;
+  pointer-events: none;
+  background: rgb(255 255 255/.4);
+}
+
+
+html:before {
+  content: "Instructions: \a ⬅️➡️ left/right to move \a ⬇️ down to jump";
+  font-family: system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  white-space: pre;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0 5px;
+  background: #fff;
+}
+
+
+body:after {
+  content: "happy Valentine's ft. mario";
+  position: fixed;
+  inset: 50px 0 auto;
+  width: fit-content;
+  margin: auto;
+  color: #ffccc5;
+  font-size: 50px;
+  text-shadow: 5px 5px #000;
+  padding: 20px 30px;
+  background: #994e00;
+  border: 3px solid;
+}
+
+
+@supports not (animation-range: 0 100%) {
+  html:after {
+    content: "Use Chrome to explore this world" !important;
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 60px;
+    pointer-events: none;
+    background: #fff !important;
+  }
+}
+
+/* ==================== PASSWORD MODAL STYLES ==================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-container {
+  background: linear-gradient(135deg, #fef5e7 0%, #fce5cd 30%, #f9d5b5 70%, #f5cba7 100%);
+  border: 4px solid #d4a574;
+  border-radius: 25px;
+  padding: 40px 50px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(212, 165, 116, 0.3),
+    0 0 0 6px rgba(255, 255, 255, 0.5),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+  animation: scaleIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-family: 'Retro Mario', system-ui, sans-serif;
+}
+
+.modal-container h2 {
+  font-size: 42px;
+  color: #8b5a2b;
+  text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5),
+    3px 3px 10px rgba(139, 90, 43, 0.2);
+  margin: 0 0 15px 0;
+  letter-spacing: 2px;
+}
+
+.modal-container p {
+  font-size: 18px;
+  color: #6b4423;
+  margin: 10px 0 20px 0;
+  font-weight: bold;
+  font-family: system-ui, sans-serif;
+  text-shadow: 0px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+#passwordInput {
+  width: 100%;
+  padding: 15px 18px;
+  font-size: 18px;
+  border: 4px solid #000;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 18px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+  transition: all 0.2s;
+}
+
+#passwordInput:focus {
+  border-color: #d4a574;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2),
+    0 0 0 4px rgba(212, 165, 116, 0.3);
+  transform: scale(1.02);
+}
+
+#submitPassword {
+  width: 100%;
+  padding: 15px 30px;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Retro Mario', system-ui, sans-serif;
+  background: linear-gradient(135deg, #e8b68e 0%, #d4a574 100%);
+  color: #fff;
+  border: 4px solid #b8895c;
+  border-radius: 12px;
+  cursor: pointer;
+  text-shadow: 2px 2px 4px rgba(107, 68, 35, 0.5);
+  box-shadow: 0 6px 0 #9d7550,
+    0 8px 15px rgba(212, 165, 116, 0.4);
+  transition: all 0.1s;
+  letter-spacing: 2px;
+}
+
+/* Success Page Styles */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700");
+
+.success-page {
+  position: fixed;
+  inset: 0;
+  display: none;
+  /* Changed from flex to none by default, JS toggles it */
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at 50% 50%, #F4C6A5 0%, #F9D9C2 10%, #FFF3E9 30%);
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.success-page.active {
+  display: flex;
+  opacity: 1;
+}
+
+.success-page svg {
+  max-width: 70vw;
+  max-height: 80vh;
+  aspect-ratio: 1/1;
+}
+
+#blobClip {
+  transform-origin: center;
+  transition: ease-out transform .4s;
+}
+
+.success-page svg:hover #blobClip {
+  transform: scale(1.15) translate(0%, 0%);
+}
+
+.text-content {
+  font: 700 10px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  fill: black;
+  mix-blend-mode: normal;
+  transition: ease fill .5s;
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    fill: black;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+  }
+  50% {
+    fill: black;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  }
+}
+
+.success-page svg:hover .text-content {
+  fill: white;
+  mix-blend-mode: overlay;
+}
+
+/* Helper to lock body scroll when success page is active */
+body.success-active {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Ensure background of body/html is transparent or covered */
+body.success-active html {
+  overflow: hidden;
+}
+
+
+
+#submitPassword:hover {
+  background: linear-gradient(135deg, #f0c9a6 0%, #e0b890 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #9d7550,
+    0 10px 20px rgba(212, 165, 116, 0.5);
+}
+
+#submitPassword:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #9d7550,
+    0 4px 10px rgba(212, 165, 116, 0.3);
+}
+
+.error-message {
+  color: #ff1744;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 15px;
+  min-height: 20px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+body.modal-active {
+  overflow: hidden;
+}
+
+body.modal-active::before,
+body.modal-active wall::after,
+body.modal-active coin::after,
+body.modal-active coin::before {
+  filter: blur(8px);
+}
+
+
+/* Scattered Text Styles */
+.scattered-text {
+  font-family: 'Retro Mario', sans-serif;
+  position: absolute;
+  font-size: 40px;
+  text-align: center;
+  z-index: 10001;
+  /* Ensure on top of SVG */
+  pointer-events: none;
+  /* Let clicks pass through, except for the link/button */
+  white-space: nowrap;
+}
+
+/* Scattered Text Animations */
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) rotate(-15deg); }
+  25% { transform: translate(20px, -15px) rotate(-18deg); }
+  50% { transform: translate(-15px, 10px) rotate(-12deg); }
+  75% { transform: translate(10px, -20px) rotate(-20deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0) rotate(10deg); }
+  33% { transform: translate(-25px, 15px) rotate(8deg); }
+  66% { transform: translate(15px, -10px) rotate(12deg); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(0, 0) rotate(5deg); }
+  20% { transform: translate(30px, -25px) rotate(8deg); }
+  40% { transform: translate(-20px, 20px) rotate(2deg); }
+  60% { transform: translate(10px, -15px) rotate(7deg); }
+  80% { transform: translate(-15px, 10px) rotate(3deg); }
+}
+
+@keyframes float4 {
+  0%, 100% { transform: translate(0, 0) rotate(-10deg) scale(1); }
+  50% { transform: translate(-20px, 15px) rotate(-12deg) scale(1.05); }
+}
+
+/* 1. dumb si ladki/ladka (bright green) */
+.text-1 {
+  color: #00ff00;
+  /* Bright Green */
+  top: 15%;
+  left: 10%;
+  transform: rotate(-15deg);
+  text-shadow: 2px 2px 0 #000;
+  animation: float1 6s ease-in-out infinite;
+}
+
+/* 2. kutte ne kata (deep bright blue) */
+.text-2 {
+  color: #00BFFF;
+  /* Deep Bright Blue */
+  bottom: 20%;
+  left: 15%;
+  transform: rotate(10deg);
+  text-shadow: 2px 2px 0 #000;
+  animation: float2 5s ease-in-out infinite;
+}
+
+/* 3. roblox ro rah h cause u cant play (deep red bright shade) */
+.text-3 {
+  color: #ff0033;
+  /* Deep Red Bright Shade */
+  top: 20%;
+  right: 10%;
+  transform: rotate(5deg);
+  text-shadow: 2px 2px 0 #000;
+  max-width: 350px;
+  white-space: normal;
+  /* Allow wrapping for longer text */
+  animation: float3 7s ease-in-out infinite;
+}
+
+/* 4. utkarsh paglu (bright orange) - Button Style */
+.text-4 {
+  color: #fff;
+  background-color: #ff6600;
+  /* Bright Orange */
+  bottom: 15%;
+  right: 15%;
+  transform: rotate(-10deg);
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 3px solid #fff;
+  border-radius: 15px;
+  box-shadow: 4px 4px 0 #000;
+  pointer-events: auto;
+  /* Enable clicking */
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-shadow: 1px 1px 0 #000;
+  animation: float4 4s ease-in-out infinite;
+}
+
+.text-4:hover {
+  transform: rotate(-10deg) scale(1.1);
+  box-shadow: 6px 6px 0 #000;
+}
+
+box-shadow: 2px 2px 0 #000;
+}
+
+/* ==================== 3D ART GALLERY STYLES ==================== */
+
+/* Gallery Mode Global Resets */
+body.gallery-active,
+body.gallery-active html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f7f7f5 !important;
+  /* Override Mario background */
+  font-family: 'Lato', sans-serif;
+  color: #111;
+  margin: 0;
+  padding: 0;
+}
+
+body.gallery-active:before,
+body.gallery-active:after,
+body.gallery-active html:before,
+body.gallery-active html:after {
+  display: none !important;
+  /* Hide Mario global pseudos */
+}
+
+/* Gallery Elements */
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#ui-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logo {
+  position: fixed;
+  top: 40px;
+  left: 50px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  z-index: 10;
+  color: #111;
+}
+
+.continue-button {
+  position: fixed;
+  top: 32px;
+  right: 50px;
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  color: #444;
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  pointer-events: auto;
+  z-index: 11;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.continue-button:hover {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+#artGallery .slide-content {
+  position: absolute;
+  top: 25%;
+  left: 8%;
+  width: 30%;
+  max-width: 450px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease-out;
+  pointer-events: auto;
+  color: #111;
+}
+
+#artGallery .slide-content.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#artGallery h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 4rem;
+  margin: 0 0 1.5rem 0;
+  line-height: 1;
+  color: #0d0d0d;
+}
+
+.catalogue-number {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #999;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.description {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 3rem;
+  text-align: justify;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  row-gap: 0.8rem;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1.5rem;
+}
+
+.meta-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #888;
+  align-self: center;
+}
+
+.meta-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #222;
+}
+
+.scroll-hint {
+  position: fixed;
+  bottom: 40px;
+  left: 50px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #aaa;
+}

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Friend Day Scrapbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Homemade+Apple&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --desk:#efe1d1;
+  --desk-deep:#d7b997;
+  --paper:#fffaf3;
+  --paper2:#f6eadb;
+  --craft:#d8c1a7;
+  --blush:#ffe4e8;
+  --peach:#ffd7bf;
+  --rose:#8b1538;
+  --rose2:#b95068;
+  --ink:#4c3037;
+  --muted:#7b5d62;
+  --mint:#dff2df;
+  --butter:#fff3b9;
+  --lav:#eadcf8;
+  --tape:rgba(255,244,214,.62);
+  --shadow:rgba(95,54,38,.18);
+  --shadow2:rgba(68,35,32,.28);
+}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--ink);
+  font-family:Montserrat,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 14% 8%,rgba(255,255,255,.36),transparent 24%),
+    radial-gradient(circle at 82% 18%,rgba(255,211,221,.28),transparent 22%),
+    linear-gradient(90deg,rgba(111,67,38,.08) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(111,67,38,.06) 1px,transparent 1px),
+    linear-gradient(135deg,var(--desk),#f8efe5 42%,var(--desk-deep));
+  background-size:auto,auto,64px 64px,64px 64px,auto;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.21;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+}
+#petals{position:fixed;inset:0;z-index:20;pointer-events:none}
+.page{
+  width:min(1180px,calc(100% - 24px));
+  margin:24px auto 54px;
+  position:relative;
+}
+.board{
+  position:relative;
+  min-height:1720px;
+  padding:38px clamp(16px,4vw,48px) 70px;
+  border-radius:8px;
+  background:
+    linear-gradient(115deg,rgba(255,255,255,.5),transparent 32%),
+    linear-gradient(180deg,#ead8c5,#dcc3aa);
+  box-shadow:0 24px 70px rgba(80,45,30,.24),inset 0 0 0 2px rgba(255,255,255,.28);
+  overflow:hidden;
+}
+.board:before,.board:after{
+  content:"";
+  position:absolute;
+  inset:16px;
+  pointer-events:none;
+  border:1px dashed rgba(139,21,56,.22);
+  border-radius:5px;
+}
+.board:after{
+  inset:0;
+  border:0;
+  opacity:.12;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M10 60 Q35 40 60 60 T110 60' fill='none' stroke='%238b1538' stroke-width='1' opacity='.35'/%3E%3C/svg%3E");
+}
+.pin{
+  position:absolute;
+  width:18px;height:18px;
+  border-radius:50%;
+  z-index:8;
+  background:radial-gradient(circle at 35% 30%,#fff,#ffc2d0 35%,#ba4967 72%);
+  box-shadow:0 4px 8px rgba(70,28,36,.26);
+}
+.pin.p1{left:29px;top:24px}.pin.p2{right:30px;top:28px}.pin.p3{left:26px;bottom:30px}.pin.p4{right:28px;bottom:28px}
+.hero{
+  position:relative;
+  z-index:5;
+  width:min(790px,100%);
+  margin:0 auto 26px;
+  padding:30px 30px 34px;
+  transform:rotate(-1.2deg);
+  background:var(--paper);
+  clip-path:polygon(0 2%,6% 0,13% 1.4%,22% .4%,31% 1.7%,43% .5%,54% 1.8%,64% .6%,76% 2%,88% .5%,100% 1.7%,99% 98%,91% 100%,80% 98.8%,68% 99.7%,55% 98.5%,42% 100%,29% 98.8%,17% 100%,6% 98.5%,0 99%);
+  box-shadow:0 15px 34px var(--shadow2),inset 0 0 50px rgba(211,176,143,.18);
+}
+.tape{
+  position:absolute;
+  height:24px;
+  border:1px solid rgba(196,141,97,.16);
+  background:linear-gradient(90deg,transparent 0 8%,var(--tape) 8% 92%,transparent 92%);
+  box-shadow:0 2px 5px rgba(80,45,30,.08);
+  z-index:9;
+  pointer-events:none;
+}
+.hero .t1{width:110px;left:34px;top:-11px;transform:rotate(-7deg)}
+.hero .t2{width:120px;right:52px;top:-9px;transform:rotate(5deg)}
+.eyebrow{
+  display:inline-block;
+  padding:7px 16px;
+  margin-bottom:14px;
+  border:1px solid rgba(139,21,56,.18);
+  border-radius:999px;
+  background:#ffe8eb;
+  color:var(--rose);
+  font:700 14px Caveat,cursive;
+}
+h1{
+  font-family:"Homemade Apple",cursive;
+  font-size:clamp(34px,7vw,72px);
+  line-height:1.22;
+  color:var(--rose);
+  letter-spacing:0;
+  text-shadow:2px 5px 0 rgba(255,194,205,.42);
+}
+.hero p{
+  max-width:670px;
+  margin-top:18px;
+  font:600 clamp(22px,3vw,32px)/1.45 Caveat,cursive;
+  color:#68444b;
+}
+.doodle-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+  font-family:Caveat,cursive;
+  font-size:21px;
+  color:var(--rose2);
+}
+.stamp{
+  padding:6px 12px;
+  transform:rotate(var(--r));
+  background:#fff1f3;
+  border:1px dashed rgba(139,21,56,.32);
+  box-shadow:2px 4px 0 rgba(139,21,56,.08);
+}
+.mess{
+  position:relative;
+  z-index:4;
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:16px;
+  align-items:start;
+}
+.piece{
+  position:relative;
+  filter:drop-shadow(0 12px 14px rgba(72,38,31,.18));
+  transition:transform .25s ease,filter .25s ease;
+}
+.piece:hover{transform:rotate(0deg) translateY(-5px) scale(1.02)!important;z-index:15;filter:drop-shadow(0 18px 18px rgba(72,38,31,.28))}
+.polaroid{
+  padding:14px 14px 52px;
+  background:#fffdf9;
+  border-radius:2px;
+  cursor:pointer;
+  box-shadow:0 12px 28px var(--shadow2),inset 0 0 0 1px rgba(99,62,49,.05);
+}
+.photo{
+  position:relative;
+  min-height:220px;
+  overflow:hidden;
+  border:1px solid rgba(80,45,30,.07);
+  background:var(--bg);
+}
+.photo:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 28% 28%,rgba(255,255,255,.75),transparent 18%),
+    linear-gradient(135deg,rgba(255,255,255,.18),transparent 46%),
+    repeating-linear-gradient(45deg,rgba(255,255,255,.11) 0 2px,transparent 2px 8px);
+}
+.photo svg{position:absolute;inset:0;width:100%;height:100%}
+.photo img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+.caption{
+  position:absolute;
+  left:14px;right:14px;bottom:15px;
+  text-align:center;
+  color:#8b5e66;
+  font:700 23px Caveat,cursive;
+}
+.bow{
+  position:absolute;
+  top:-20px;right:18px;
+  width:58px;height:42px;
+  filter:drop-shadow(0 4px 4px rgba(95,34,45,.22));
+}
+.clip{
+  position:absolute;
+  left:18px;top:-18px;
+  width:30px;height:58px;
+  border:4px solid #ba8090;
+  border-left-color:transparent;
+  border-radius:18px;
+  transform:rotate(-12deg);
+  z-index:12;
+}
+.note,.scrap,.ticket,.timeline{
+  padding:18px;
+  border-radius:3px;
+  font:600 24px/1.25 Caveat,cursive;
+  color:#57393f;
+  box-shadow:0 12px 25px var(--shadow),inset 0 0 32px rgba(255,255,255,.24);
+}
+.note small,.scrap small{display:block;margin-top:8px;font:600 13px Montserrat,sans-serif;color:rgba(87,57,63,.72)}
+.note.pink{background:var(--blush)}.note.yellow{background:var(--butter)}.note.peach{background:var(--peach)}.note.mint{background:var(--mint)}.note.lav{background:var(--lav)}
+.scrap{
+  background:#fff8ee;
+  clip-path:polygon(0 9%,7% 1%,17% 4%,26% 0,37% 4%,49% 1%,61% 5%,72% 0,84% 4%,94% 1%,100% 8%,98% 92%,91% 100%,81% 96%,70% 100%,60% 96%,49% 100%,38% 96%,27% 100%,15% 96%,6% 100%,0 91%);
+}
+.ticket{
+  background:#ffeef2;
+  border:2px dashed rgba(139,21,56,.3);
+  font-size:20px;
+  text-align:center;
+}
+.flower{
+  position:relative;
+  min-height:130px;
+  transform:rotate(var(--r));
+}
+.flower svg{width:100%;height:100%;filter:drop-shadow(0 8px 7px rgba(65,43,28,.18))}
+.washi{
+  height:38px;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 10px,rgba(255,194,205,.8) 10px 20px),#ffdbe2;
+  border-radius:2px;
+  opacity:.9;
+}
+.string{
+  height:88px;
+  border-top:2px solid rgba(139,21,56,.28);
+}
+.string:before,.string:after{
+  content:"";
+  position:absolute;
+  top:18px;
+  width:46px;height:40px;
+  background:#ffd0da;
+  clip-path:polygon(50% 100%,0 36%,0 10%,22% 0,50% 19%,78% 0,100% 10%,100% 36%);
+  transform:rotate(-8deg);
+}
+.string:before{left:18%}.string:after{right:20%;transform:rotate(8deg);background:#fff1bd}
+.timeline{
+  background:#fffaf3;
+  grid-column:2/12;
+  transform:rotate(.6deg);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  font-family:Montserrat,sans-serif;
+}
+.moment{
+  position:relative;
+  min-height:132px;
+  padding:14px 12px 12px;
+  background:linear-gradient(#fff7f7,#fffdf9);
+  border:1px solid rgba(139,21,56,.12);
+  border-radius:4px;
+}
+.moment b{display:block;color:var(--rose);font:700 16px Montserrat,sans-serif;margin-bottom:8px}
+.moment span{font:700 22px/1.16 Caveat,cursive;color:#604047}
+.ending{
+  grid-column:3/11;
+  padding:28px;
+  margin-top:10px;
+  text-align:center;
+  background:#fffaf3;
+  transform:rotate(-.8deg);
+  box-shadow:0 16px 34px var(--shadow2);
+}
+.ending h2{font:700 clamp(28px,4vw,47px)/1.25 Caveat,cursive;color:var(--rose);margin-bottom:16px}
+#typewriter{min-height:80px;font:600 clamp(22px,3vw,34px)/1.32 Caveat,cursive;color:#6b424a}
+.heart-btn{
+  margin-top:18px;
+  border:0;
+  border-radius:999px;
+  padding:14px 24px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ff8faa,#8b1538);
+  color:white;
+  font:700 15px Montserrat,sans-serif;
+  box-shadow:0 10px 20px rgba(139,21,56,.26);
+}
+.heart-btn:hover{transform:translateY(-2px)}
+.music{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:40;
+  width:62px;height:62px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  color:white;
+  cursor:pointer;
+  background:radial-gradient(circle at 34% 32%,#ffd3de,#b95068 54%,#6d1230);
+  box-shadow:0 12px 26px rgba(92,36,42,.32);
+}
+.music.playing{animation:spin 3s linear infinite}
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:60;
+  display:none;
+  place-items:center;
+  padding:18px;
+  background:rgba(38,20,24,.62);
+  backdrop-filter:blur(8px);
+}
+.lightbox.open{display:grid}
+.lb-card{
+  position:relative;
+  width:min(560px,94vw);
+  padding:18px 18px 64px;
+  background:#fffdf9;
+  transform:rotate(-1deg);
+  box-shadow:0 30px 80px rgba(0,0,0,.38);
+}
+.lb-photo{height:min(58vh,440px);background:var(--lb);overflow:hidden;position:relative}
+.lb-photo svg,.lb-photo img{width:100%;height:100%}
+.lb-photo img{object-fit:contain;background:#fffdf9}
+.lb-cap{position:absolute;bottom:18px;left:20px;right:20px;text-align:center;font:700 31px Caveat,cursive;color:#814d57}
+.close{
+  position:absolute;
+  right:-12px;top:-14px;
+  width:40px;height:40px;
+  border:0;border-radius:50%;
+  color:white;background:#8b1538;
+  cursor:pointer;font-size:22px;
+}
+.s1{grid-column:1/4;transform:rotate(-6deg);margin-top:6px}.s2{grid-column:4/8;transform:rotate(3deg);margin-top:18px}.s3{grid-column:8/11;transform:rotate(-2deg);margin-top:-4px}.s4{grid-column:11/13;transform:rotate(7deg)}
+.s5{grid-column:1/3;transform:rotate(4deg);margin-top:-8px}.s6{grid-column:3/6;transform:rotate(-3deg);margin-top:12px}.s7{grid-column:6/9;transform:rotate(2deg)}.s8{grid-column:9/13;transform:rotate(-4deg);margin-top:22px}
+.s9{grid-column:1/5;transform:rotate(2deg);margin-top:4px}.s10{grid-column:5/8;transform:rotate(-5deg);margin-top:-14px}.s11{grid-column:8/10;transform:rotate(5deg);margin-top:0}.s12{grid-column:10/13;transform:rotate(-2deg);margin-top:-4px}
+.s13{grid-column:1/4;transform:rotate(-2deg)}.s14{grid-column:4/7;transform:rotate(3deg);margin-top:20px}.s15{grid-column:7/10;transform:rotate(-4deg)}.s16{grid-column:10/13;transform:rotate(4deg);margin-top:14px}
+.s17{grid-column:1/5;transform:rotate(-3deg);margin-top:12px}.s18{grid-column:5/9;transform:rotate(2deg)}.s19{grid-column:9/13;transform:rotate(-2deg);margin-top:10px}
+.wide{grid-column:1/13}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(38deg);opacity:0}}
+@media(max-width:820px){
+  .page{width:100%;margin:0}
+  .board{min-height:0;border-radius:0;padding:24px 12px 70px}
+  .hero{padding:26px 18px}
+  .mess{display:block}
+  .piece,.timeline,.ending{width:min(100%,430px);margin:18px auto!important;transform:rotate(var(--mrot,0deg))!important}
+  .timeline{display:block;padding:16px}
+  .moment{margin-bottom:12px}
+  .photo{min-height:245px}
+  .s1{--mrot:-3deg}.s2{--mrot:2deg}.s3{--mrot:-1deg}.s4{--mrot:4deg}.s5{--mrot:-4deg}.s6{--mrot:3deg}.s7{--mrot:-2deg}.s8{--mrot:2deg}
+}
+</style>
+</head>
+<body>
+<canvas id="petals"></canvas>
+<main class="page">
+  <section class="board">
+    <span class="pin p1"></span><span class="pin p2"></span><span class="pin p3"></span><span class="pin p4"></span>
+
+    <header class="hero">
+      <span class="tape t1"></span><span class="tape t2"></span>
+      <span class="eyebrow">June 8 scrapbook memory board</span>
+      <h1>Happy Best Friend Day</h1>
+      <p>Ye page un chhoti chhoti baaton ke naam: late night calls, stupid jokes, random photos, secret plans, aur woh comfort jo sirf best friend ke saath milta hai.</p>
+      <div class="doodle-row">
+        <span class="stamp" style="--r:-4deg">forever team</span>
+        <span class="stamp" style="--r:3deg">best chaos</span>
+        <span class="stamp" style="--r:-2deg">memories kept here</span>
+        <span class="stamp" style="--r:5deg">made with love</span>
+      </div>
+    </header>
+
+    <div class="mess">
+      <article class="piece polaroid s1" onclick="openLB(0)" style="--bg:linear-gradient(135deg,#ffd7df,#fff6e8 45%,#b9d8c0)">
+        <span class="clip"></span><span class="tape" style="width:92px;left:43%;top:-12px;transform:rotate(8deg)"></span>
+        <div class="photo">
+          <img src="imgf/img1.jpeg" alt="first favorite photo">
+        </div>
+        <div class="caption">first favorite photo</div><svg class="bow" viewBox="0 0 90 60"><path d="M45 28 C26 2 5 5 8 31 C12 54 31 49 45 32Z" fill="#ff9bb0"/><path d="M45 28 C63 2 84 5 81 31 C78 54 59 49 45 32Z" fill="#ff8aa3"/><circle cx="45" cy="30" r="9" fill="#8b1538"/></svg>
+      </article>
+
+      <div class="piece note yellow s2"><span class="tape" style="width:80px;left:35%;top:-12px;transform:rotate(-5deg)"></span>Reminder: agar duniya boring lage, ek call karna. Main drama, advice aur hasi teeno ready rakhunga.<small>sticky note no. 01</small></div>
+      <div class="piece flower s3" style="--r:-13deg"><svg viewBox="0 0 180 180"><path d="M88 52 C72 86 78 121 52 166" stroke="#758d65" stroke-width="5" fill="none"/><g opacity=".92"><ellipse cx="83" cy="53" rx="18" ry="36" fill="#ef9aac" transform="rotate(-18 83 53)"/><ellipse cx="103" cy="64" rx="18" ry="35" fill="#ffc8d1" transform="rotate(38 103 64)"/><ellipse cx="67" cy="69" rx="17" ry="32" fill="#f7b5c1" transform="rotate(-70 67 69)"/><circle cx="84" cy="68" r="15" fill="#fff2c8"/></g><ellipse cx="64" cy="120" rx="29" ry="10" fill="#8fad7c" transform="rotate(-33 64 120)"/></svg></div>
+      <div class="piece ticket s4">Bestie Pass<br><b>valid forever</b></div>
+
+      <div class="piece washi s5"></div>
+      <article class="piece polaroid s6" onclick="openLB(1)" style="--bg:linear-gradient(135deg,#cfe9ff,#fff3c9 48%,#ffd5dc)">
+        <span class="tape" style="width:96px;left:33%;top:-13px;transform:rotate(-8deg)"></span>
+        <div class="photo"><img src="imgf/img2.jpeg" alt="sunny day memory"></div>
+        <div class="caption">THAT MEMORY</div>
+      </article>
+      <div class="piece scrap s7">Best friend ka matlab: bina context ke bhi baat samajh jana, aur context milne ke baad aur zyada hasna.</div>
+      <article class="piece polaroid s8" onclick="openLB(2)" style="--bg:linear-gradient(135deg,#ffe1eb,#e4f4db 46%,#fff4c6)">
+        <span class="clip"></span><div class="photo"><img src="imgf/img3.jpeg" alt="Cute selfie"></div>
+        <div class="caption">Cute selfie</div>
+      </article>
+
+      <div class="piece note pink s9"><span class="tape" style="width:90px;left:30%;top:-13px;transform:rotate(6deg)"></span>Dear bestie, tu sirf ek person nahi, meri daily life ka favorite notification hai.<small>handwritten feeling</small></div>
+      <div class="piece string s10"></div>
+      <div class="piece note mint s11">Promise: tere plans pe main over-excited rahunga, even if plan sirf chai peena ho.</div>
+      <div class="piece flower s12" style="--r:15deg"><svg viewBox="0 0 180 180"><path d="M91 30 C96 75 88 110 119 170" stroke="#7a976d" stroke-width="5" fill="none"/><g><circle cx="82" cy="50" r="14" fill="#ffc9d5"/><circle cx="111" cy="55" r="13" fill="#f8a9ba"/><circle cx="99" cy="82" r="14" fill="#ffd5de"/><circle cx="68" cy="80" r="11" fill="#f5a5b8"/><circle cx="125" cy="93" r="10" fill="#ffc9d5"/></g><ellipse cx="103" cy="130" rx="26" ry="9" fill="#94ad81" transform="rotate(28 103 130)"/></svg></div>
+
+      <div class="piece timeline">
+        <div class="moment"><b>Chapter 01</b><span>stranger se favorite person tak</span></div>
+        <div class="moment"><b>Chapter 02</b><span>inside jokes jo kisi ko samajh nahi aate</span></div>
+        <div class="moment"><b>Chapter 03</b><span>support, honesty, aur thodi si nautanki</span></div>
+        <div class="moment"><b>Chapter 04</b><span>future plans: more trips, more photos</span></div>
+      </div>
+
+      <article class="piece polaroid s13" onclick="openLB(3)" style="--bg:linear-gradient(135deg,#ffe7c6,#ffe0e8 44%,#d9f0ee)">
+        <span class="tape" style="width:102px;left:24%;top:-12px;transform:rotate(10deg)"></span>
+        <div class="photo"><img src="imgf/img4.jpeg" alt="adventure mode"></div>
+        <div class="caption">adventure mode</div>
+      </article>
+      <div class="piece note lav s14">Some people make you laugh louder, smile wider, and live softer. Tu wahi hai.</div>
+      <article class="piece polaroid s15" onclick="openLB(4)" style="--bg:linear-gradient(135deg,#f3e7ff,#fff4d6 50%,#ffd2dc)">
+        <span class="clip"></span><div class="photo"><img src="imgf/img5.jpeg" alt="golden hour"></div>
+        <div class="caption">golden hour</div>
+      </article>
+      <div class="piece scrap s16">Jab bhi life ka page messy ho, hum usko scrapbook bana denge.</div>
+
+      <div class="piece note peach s17"><span class="tape" style="width:100px;left:42%;top:-13px;transform:rotate(-7deg)"></span>Open when sad: yaad rakh, tu loved hai, needed hai, aur mere jokes tolerate karne ke liye award deserve karta/karti hai.</div>
+      <article class="piece polaroid s18" onclick="openLB(5)" style="--bg:linear-gradient(135deg,#d7f2e5,#fff7ca 48%,#ffd7d7)">
+        <span class="tape" style="width:120px;left:30%;top:-12px;transform:rotate(2deg)"></span>
+        <div class="photo"><img src="imgf/img6.jpeg" alt="Ofc You Are Great"></div>
+        <div class="caption">Ofc You Are Great</div>
+      </article>
+      <div class="piece ticket s19">FRIENDSHIP<br>That I Will Always Treasure</div>
+
+      <section class="piece ending">
+        <span class="tape" style="width:110px;left:44px;top:-12px;transform:rotate(-5deg)"></span>
+        <span class="tape" style="width:105px;right:52px;top:-12px;transform:rotate(5deg)"></span>
+        <h2>Thank you for being my favorite kind of forever.</h2>
+        <div id="typewriter"></div>
+        <button class="heart-btn" onclick="window.location.href='journey.html'">Continue</button>
+      </section>
+    </div>
+  </section>
+</main>
+
+<button class="music" id="musicBtn" onclick="toggleMusic()" title="cozy music toggle" aria-label="Toggle cozy music">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18V5l10-2v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="2"/></svg>
+</button>
+
+<div class="lightbox" id="lightbox" onclick="maybeClose(event)">
+  <div class="lb-card">
+    <button class="close" onclick="closeLB()" aria-label="Close">x</button>
+    <div class="lb-photo" id="lbPhoto"></div>
+    <div class="lb-cap" id="lbCap">memory</div>
+  </div>
+</div>
+
+<script>
+const captions=[
+  "first favorite photo - the one that started the scrapbook",
+  "THAT MEMORY - laughter, snacks, and zero planning",
+  "Cute selfie - blurry but emotionally perfect",
+  "adventure mode - because every road is better together",
+  "golden hour - soft light, loud laughs",
+  "Ofc You Are Great - same team, every season"
+];
+const photos=[...document.querySelectorAll(".polaroid .photo")].map(p=>p.innerHTML);
+function openLB(i){
+  document.getElementById("lbPhoto").innerHTML=photos[i]||photos[0];
+  document.getElementById("lbCap").textContent=captions[i]||"best memory";
+  document.getElementById("lightbox").classList.add("open");
+}
+function closeLB(){document.getElementById("lightbox").classList.remove("open")}
+function maybeClose(e){if(e.target.id==="lightbox")closeLB()}
+
+const lines=[
+  "Tu meri life ka woh page hai jise main baar baar padhna chahta/chahti hoon.",
+  "Har memory thodi messy, thodi funny, aur poori precious hai.",
+  "Best Friend Day pe bas itna: thank you for staying, laughing, and caring.",
+  "Forever grateful. Forever team."
+];
+let li=0,ci=0,back=false;
+function type(){
+  const el=document.getElementById("typewriter");
+  const text=lines[li];
+  el.textContent=text.slice(0,ci);
+  if(!back && ci<text.length)ci++;
+  else if(!back){back=true;setTimeout(type,1700);return}
+  else if(ci>0)ci--;
+  else{back=false;li=(li+1)%lines.length}
+  setTimeout(type,back?28:58);
+}
+type();
+
+function burstHearts(){
+  const chars=["&hearts;","love","xo","bestie","smile","forever"];
+  for(let i=0;i<34;i++){
+    const h=document.createElement("span");
+    h.innerHTML=chars[Math.floor(Math.random()*chars.length)];
+    h.style.cssText=`position:fixed;left:${20+Math.random()*60}vw;bottom:${8+Math.random()*18}vh;z-index:80;pointer-events:none;color:${["#8b1538","#ff8faa","#b95068","#fff3b9"][Math.floor(Math.random()*4)]};font:${Math.random()>.45?"700 22px Caveat,cursive":"700 16px Montserrat,sans-serif"};--x:${-140+Math.random()*280}px;--y:${-250-Math.random()*210}px;animation:fly ${1.2+Math.random()*1}s ease-out forwards`;
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2300);
+  }
+}
+function toggleMusic(){
+  const b=document.getElementById("musicBtn");
+  b.classList.toggle("playing");
+  b.title=b.classList.contains("playing")?"cozy music playing":"cozy music paused";
+}
+
+const canvas=document.getElementById("petals");
+const ctx=canvas.getContext("2d");
+function size(){canvas.width=innerWidth;canvas.height=innerHeight}
+size();addEventListener("resize",size);
+const petals=Array.from({length:36},()=>({
+  x:Math.random()*innerWidth,y:Math.random()*innerHeight,w:5+Math.random()*11,h:9+Math.random()*18,
+  vx:-.35+Math.random()*.7,vy:.22+Math.random()*.65,a:Math.random()*6.28,s:-.02+Math.random()*.04,
+  c:["#ffc6d1","#ffdce2","#f7a8b9","#fff0be"][Math.floor(Math.random()*4)],o:.28+Math.random()*.42
+}));
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  petals.forEach(p=>{
+    p.x+=p.vx+Math.sin(p.a)*.18;p.y+=p.vy;p.a+=p.s;
+    if(p.y>canvas.height+30){p.y=-30;p.x=Math.random()*canvas.width}
+    if(p.x<-30)p.x=canvas.width+30;if(p.x>canvas.width+30)p.x=-30;
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.globalAlpha=p.o;ctx.fillStyle=p.c;
+    ctx.beginPath();ctx.ellipse(0,0,p.w,p.h,0,0,Math.PI*2);ctx.fill();ctx.restore();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
